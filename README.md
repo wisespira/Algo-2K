@@ -3,7 +3,7 @@
 <h1> Algo-2K </h1>
 
 
-Working on musical use for L-System
+Python backtesting PWA with server 
 </div>
 
 <p align="center">
