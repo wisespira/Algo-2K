@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" style="
+    overflow-x: hidden;
+">
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="Js/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="Plugin/codemirror/lib/codemirror.js"></script>
+    <script src="Plugin/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="Plugin/codemirror/mode/python/python.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="Css/index.css">
+    <link rel="stylesheet" type="text/css" href="Plugin/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="Plugin/codemirror/theme/the-matrix.css">
+    <link rel="stylesheet" href="Plugin/codemirror/theme/darcula.css">
+    <!-- <link href="Plugin/fontawesome/fontawesome/css/all.min" rel="stylesheet"> -->
+    <script src="Plugin/codemirror/addon/scroll/simplescrollbars.js"></script>
+    <link rel="stylesheet" href="Plugin/codemirror/addon/scroll/simplescrollbars.css">
+    <!-- <link rel="stylesheet" href="Plugin/codemirror/theme/night.css"> -->
+
+    <!-- <link rel="shortcut icon" href="Assets/ic_launcher.ico" /> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Algo 2k">
+    <meta name="application-name" content="Algo 2k">
+    <meta name="msapplication-TileColor" content="#1b1b1e">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Algo 2K</title>
+</head>
+
+<body style="height: 100vh;">
+    <nav class="navbar  navbar-expand-lg navbar-light " id = "nav">
+        <img src="Assets/ic_launcher/res/mipmap-hdpi/ic_launcher.png" width="50" height="50" class=" " alt="">
+        <a class="navbar-brand" href="#" style="  margin-right: 2px;">
+         Algo 2K |
+         </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="color: aliceblue;">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#Home">Home <span class="sr-only">(current)</span></a> |
+                <a class="nav-item nav-link active" href="#Skills">Strategy Evaluation <span class="sr-only">(current)</span></a> |
+                <a class="nav-item nav-link active" href="#Experience">Financial markets <i class="fab fa-bitcoin"></i> <span class="sr-only">(current)</span></a>
+
+            </div>
+
+            <form class="form-inline my-2 my-lg-0" style="
+    margin-left:auto;">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search Symbol" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
+    </nav>
+
+    <div class="grid-container">
+        <div class="grid-item">
+            <div style="padding-left: 5%;padding-right: 10%; padding-top: 20px;">
+                <!-- <h2 style="text-align: center;">Editor</h2> -->
+                <form  method="POST">
+                    <textarea class="codemirror-textarea" id="code">
+
+#Cross moving Avrages Implementation
+#Sets investment
+investment= float(10000.0)
+#sets Strategy
+aapl = getData('AAPL', [2016,10,1],[2017,10,1])
+# Initialize the short and long Avarage lengths
+short_window = 30
+long_window = 100
+# Creates Signals data with the Apple stock dates
+# Initilizes all and signals column to zero
+signals = pd.DataFrame(index=aapl.index)
+signals['signal'] = 0.0
+# Create moving average over the short window
+signals['shortMovingAvarage'] = aapl['Close'].rolling(window=short_window, min_periods=1, center=False).mean()
+signals['longMovingAvarage'] = aapl['Close'].rolling(window=long_window, min_periods=1, center=False).mean()
+# Calculate trading signals
+signals['signal'][short_window:] = np.where(signals['shortMovingAvarage'][short_window:]
+                                              > signals['longMovingAvarage'][short_window:], 1.0, 0.0)
+# Generate Positions
+signals['positions'] = signals['signal'].diff()
+
+</textarea>
+                    <hr>
+                    <button id="submit" style="float: right; margin-bottom: 5px;" type="button" class="btn btn-warning">Upload</button>
+                </form>
+            </div>
+            <div style="text-align: center;padding: 10px;">
+
+                <div style="justify-content: center;display: flex;">
+                    <!-- Themes: -->
+
+                    <div class="themeButton" style="background: aliceblue;" onclick="selectTheme('default')"></div>
+                    <div class="themeButton" style=" background: #FF9E59;" onclick="selectTheme('darcula')"></div>
+                    <div class="themeButton" style=" background: #61A151;" onclick="selectTheme('the-matrix')"></div>
+
+                    <!-- <select class="form-control" style="width: fit-content;" onchange="selectTheme()" id=select>
+                     <option selected>default</option>
+                     <option>the-matrix</option>
+                  </select> -->
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" style="border-left: 2px solid #6D676E; margin-top: 15px;" id ="sidebar">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success">GOOGL 1,214.27 USD +102.72 (9.24%) &#8593;</li>
+                <li class="list-group-item list-group-item-success">MSFT 158.83 USD +19.77 (14.22%) &#8593;</li>
+                <li class="list-group-item list-group-item-success">AAPL 277.97 USD +29.74 (11.98%) &#8593;</li>
+                <li class="list-group-item list-group-item-success">ACN 166.51 USD +13.98 (9.17%) &#8593;</li>
+                <li class="list-group-item list-group-item-success">FDS 253.07 USD +19.65 (8.42%) &#8593;</li>
+                <li class="list-group-item list-group-item-success">PAT 0.90 CAD +0.060 (7.14%) &#8593;</li>
+                <li class="list-group-item list-group-item-danger">WNDW 1.53 USD −0.28 (15.47%) &#8595;</li>
+                <li class="list-group-item list-group-item-danger">RDSB 1,084.02 GBX −15.98 (1.45%) &#8595;</li>
+                <li class="list-group-item list-group-item-danger">HSBA 480.95 GBX -36.35 (8.18%) &#8595;</li>
+                <li class="list-group-item list-group-item-danger">DBK 5.10 EUR -0.23 (4.80%) &#8595;</li>
+                <li class="list-group-item list-group-item-danger">MS 5.10 37.50 USD -6.19 (19.77%) &#8595;</li>
+            </ul>
+
+            <!-- <button style="margin-left: 10px" type="button" name="button" onclick="test1()">Test 1</button>
+               <button type="button" name="button" onclick="test2()">Test 2</button>
+               <button type="button" id = "garry" name="button">Test 3</button>
+               <button type="button" onclick="verify1()" name="button">Test 4</button> -->
+        </div>
+    </div>
+
+<hr>
+
+    <div class="grid-container2">
+        <div class="grid-item">
+            <h2 style="  text-align: center;" id="evalTitle"></h2>
+    <div id="graph"></div>
+</div>
+    <div class="grid-item" style="
+    margin-top: 10%;
+">
+      <p  id="eval"></p>
+        <p  id="debug"></p>
+        </div>
+</div>
+
+
+
+
+
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            mode: {
+                name: "python",
+                version: 3,
+                singleLineStringErrors: false
+            },
+            styleActiveLine: true,
+            matchBrackets: true,
+            scrollbarStyle: "simple"
+        });
+        var input = document.getElementById("select");
+
+        function selectTheme() {
+            var theme = input.options[input.selectedIndex].textContent;
+            console.log(theme)
+            editor.setOption("theme", theme);
+            location.hash = "#" + theme;
+        }
+
+        function selectTheme(a) {
+            var theme = a;
+            console.log(a)
+            editor.setOption("theme", a);
+            location.hash = "#" + a;
+
+              themeChange(a)
+
+
+        }
+
+
+        function themeChange(a){
+          if(a == "default"){
+          document.body.style.background = "#fff";
+          document.getElementById("nav").style.borderBottom  =  "2px solid #6D676E";
+          document.getElementById("sidebar").style.borderLeft  =  "2px solid #6D676E";
+          var elements = document.querySelectorAll('.list-group-item');
+          for(var i=0; i<elements.length; i++){
+              elements[i].style.background = "";
+          }
+        }
+        if(a == "darcula"){
+        document.body.style.background = "#fff";
+        document.getElementById("nav").style.borderBottom  =  "2px solid #6D676E";
+        document.getElementById("sidebar").style.borderLeft  =  "2px solid #6D676E";
+        var elements = document.querySelectorAll('.list-group-item');
+        for(var i=0; i<elements.length; i++){
+              elements[i].style.background = "";
+        }
+      }
+      if(a == "the-matrix"){
+        document.body.style.background = "#111";
+        document.getElementById("nav").style.borderBottom  =  "2px solid #00FF00";
+        document.getElementById("sidebar").style.borderLeft  =  "2px solid #00FF00";
+        var elements = document.querySelectorAll('.list-group-item');
+        for(var i=0; i<elements.length; i++){
+            elements[i].style.background = "transparent";
+        }
+      }
+    }
+        var choice = (location.hash && location.hash.slice(1)) ||
+            (document.location.search &&
+                decodeURIComponent(document.location.search.slice(1)));
+        if (choice) {
+            input.value = choice;
+            editor.setOption("theme", choice);
+        }
+        CodeMirror.on(window, "hashchange", function() {
+            var theme = location.hash.slice(1);
+            if (theme) {
+                input.value = theme;
+                selectTheme();
+            }
+        });
+    </script>
+
+    <script src="upup.min.js"></script>
+      <script>
+      UpUp.start({
+        'content-url': 'index.html'
+      });
+      </script>
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="Js/index.js"></script>
+</body>
+
+</html>

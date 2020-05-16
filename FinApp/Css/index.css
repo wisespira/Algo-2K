@@ -1,0 +1,55 @@
+.cm-s-the-matrix{
+  border-top: solid;
+}
+/* #111 works well on body */
+.cm-s-default{
+  border-top: 1px solid #6D676E;
+  /* border-top: 1px solid rgba(0,0,0,.1); */
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.navbar{
+  justify-content: left;
+  background: #1B1B1E !important;
+  border-bottom: 2px solid #6D676E;
+
+}
+.CodeMirror{
+  height: 70vh !important;
+}
+.navbar-brand{
+ color: #fff !important;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 73vw 27vw ;
+}
+.grid-item {
+
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 50vw 50vw ;
+}
+
+.CodeMirror {
+    box-shadow: 0 35px 70px -12px rgba(0, 0, 0, .35);
+}
+.nav-link{
+  padding: unset;
+}
+.nav-item{
+  color: #fff !important;
+}
+.themeButton{
+border: 1px solid; border-radius: 5px;margin-left: 5px; margin-right: 5px; height: 20px;width: 20px;
+
+}
+
+
+iframe{
+  border: none;
+}
