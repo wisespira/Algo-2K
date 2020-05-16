@@ -1,6 +1,6 @@
 
 <div align="center">
-# Algo-2K
+<h1> Algo-2K </h1>
 
 
 Working on musical use for L-System
